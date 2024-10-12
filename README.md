@@ -1,5 +1,5 @@
 # com_anm22_wb_iconbox - WebBase plugin
-![version](https://img.shields.io/badge/version-1.2-blue)
+![version](https://img.shields.io/badge/version-1.3-blue)
 
 com_anm22_wb_iconbox is a page block with image, title, descrption and link.
 
@@ -11,7 +11,7 @@ com_anm22_wb_iconbox is a page block with image, title, descrption and link.
 
 ## System Requirements
 *	WebBase engine v6
-*	WebBase editor v2.6
+*	WebBase editor v3.0
 
 Download WebBase: [WebBase on GitHub](https://github.com/ANM22/WebBase)
 

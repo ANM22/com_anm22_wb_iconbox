@@ -1,13 +1,12 @@
 <?php
-/*
- * Author: ANM22
- * Last modified: 25 Nov 2019 - GMT +1 11:23
- *
- * ANM22 Andrea Menghi all rights reserved
- *
- */
 
-class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element {
+/**
+ * Iconbox plugin
+ *
+ * @copyright 2024 Paname srl
+ */
+class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element
+{
 
     // client
     public $elementClass = "com_anm22_wb_iconbox";
@@ -16,24 +15,71 @@ class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element {
     private $src;
     private $title;
     private $text;
-    private $anim;
+    private $anim = null;
     private $ratio;
     private $imgOrBg;
-    private $link;
+    private $link = null;
 
-    function importXMLdoJob($xml) {
+    /**
+     * @deprecated since editor 3.0
+     * 
+     * Method to init the element.
+     * 
+     * @param SimpleXMLElement $xml Element data
+     * @return void
+     */
+    function importXMLdoJob($xml)
+    {
         $this->src = $xml->src;
         $this->title = $xml->title;
         $this->text = $xml->text;
-        $this->anim = $xml->anim;
+        if ($xml->anim && $xml->anim != "" && $xml->anim != "none") {
+            $this->anim = $xml->anim;
+        }
         $this->ratio = $xml->ratio;
         $this->imgOrBg = $xml->imgOrBg;
         $this->cssClass = $xml->cssClass;
         $this->link = $xml->link;
     }
 
-    function show() {
-        if ($this->anim != "" && $this->anim != "none") {
+    /**
+     * Method to init the element.
+     * 
+     * @param mixed[] $data Element data
+     * @return void
+     */
+    public function initData($data)
+    {
+        $this->src = $data['src'];
+        $this->title = $data['title'];
+        if (isset($data['text'])) {
+            if ($data['text']) {
+                $this->text = $data['text'];
+            }
+        }
+        if (isset($data['anim']) && $data['anim'] && $data['anim'] != "" && $data['anim'] != "none") {
+            $this->anim = $data['anim'];
+        }
+        $this->ratio = $data['ratio'];
+        $this->imgOrBg = $data['imgOrBg'];
+        if (isset($data['cssClass'])) {
+            if ($data['cssClass']) {
+                $this->cssClass = $data['cssClass'];
+            }
+        }
+        if (isset($data['link']) && $data['link']) {
+            $this->link = $data['link'];
+        }
+    }
+
+    /**
+     * Render the page element
+     * 
+     * @return void
+     */
+    function show()
+    {
+        if ($this->anim) {
             /* Animate.css */
             include_once $this->page->getHomeFolderRelativePHPURL() . "ANM22WebBase/website/plugins/com_anm22_wb_libs/js/wow.php";
             /* Scroll reveal */
@@ -68,12 +114,12 @@ class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element {
                 if ($this->cssClass != "" and $this->cssClass != "") {
                     echo ' ' . $this->cssClass;
                 }
-                if ($this->anim != "" and $this->anim != "none") {
+                if ($this->anim) {
                     echo ' wow ' . $this->anim;
                 }
                 echo '" id="iconbox-' . $this->id . '">';
                 
-            if ($this->link!= "") {
+            if ($this->link && $this->link != "") {
                 echo '<a href="' . $this->link . '">';
             }
             if ($this->src != "") {
@@ -85,7 +131,7 @@ class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element {
             }
             echo '<h2 class="icon-box-title">' . $this->title . '</h2>';
             echo '<p class="icon-box-desc">' . $this->text . '</p>';
-            if ($this->link!= "") {
+            if ($this->link && $this->link != "") {
                 echo '</a>';
             }
         echo '</div>';
