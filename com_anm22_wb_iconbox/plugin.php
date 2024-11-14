@@ -3,7 +3,7 @@
 /**
  * Iconbox plugin
  *
- * @copyright 2024 Paname srl
+ * @author Andrea Menghi <andrea.menghi@anm22.it>
  */
 class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element
 {
@@ -129,7 +129,9 @@ class com_anm22_wb_iconbox extends com_anm22_wb_editor_page_element
                     echo '<img class="icon-box-icon" src="' . $this->src . '" alt="" />';
                 }
             }
-            echo '<h2 class="icon-box-title">' . $this->title . '</h2>';
+            if ($this->title) {
+                echo '<h2 class="icon-box-title">' . $this->title . '</h2>';
+            }
             echo '<p class="icon-box-desc">' . $this->text . '</p>';
             if ($this->link && $this->link != "") {
                 echo '</a>';
